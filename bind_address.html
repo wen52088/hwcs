@@ -6,10 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>设置绑定地址</title>
   <link rel="stylesheet" href="style_password.css" />
+  
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
-    const userId = Telegram.WebApp.initDataUnsafe.user?.id || "unknown";
-    let errorKey = `bindError_${userId}`;
-    let passKey = `userPassword_${userId}`;
+    Telegram.WebApp.ready?.();
+    let userId = "test_user";
+    try {
+      userId = Telegram.WebApp.initDataUnsafe?.user?.id || "test_user";
+    } catch (e) {}
+
+    const passKey = `userPassword_${userId}`;
+    const errorKey = `bindError_${userId}`;
 
     function validateTRC20(address) {
       return /^T[a-zA-Z0-9]{33}$/.test(address);
@@ -38,13 +45,14 @@
         return;
       }
       localStorage.setItem(`withdrawAddress_${userId}`, address);
-      window.location.href = "bind_address_success.html";
+      window.location.replace("bind_address_success.html");
     }
 
     function focusShift(input) {
       input.value = input.value.replace(/[^0-9]/g, "").slice(0, 4);
     }
   </script>
+
 </head>
 <body>
   <div class="container" style="margin-top: 40px;">
