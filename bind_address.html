@@ -27,7 +27,7 @@
       const address = document.getElementById("address").value.trim();
       const password = document.getElementById("password").value.trim();
 
-      const stored = sessionStorage.getItem(passKey);
+      const stored = localStorage.getItem(passKey);
       alert(`调试信息：userId = ${userId}\npassKey = ${passKey}\nstored = ${stored}`);
 
       if (!validateTRC20(address)) {
@@ -39,8 +39,8 @@
         return;
       }
       if (password !== stored) {
-        let err = parseInt(sessionStorage.getItem(errorKey) || "0") + 1;
-        sessionStorage.setItem(errorKey, err);
+        let err = parseInt(localStorage.getItem(errorKey) || "0") + 1;
+        localStorage.setItem(errorKey, err);
         if (err >= 5) {
           alert("🚫 您的账户已经被系统锁定，请联系客服人工处理。");
         } else {
@@ -48,7 +48,7 @@
         }
         return;
       }
-      sessionStorage.setItem(`withdrawAddress_${userId}`, address);
+      localStorage.setItem(`withdrawAddress_${userId}`, address);
       window.location.replace("bind_address_success.html");
     }
 
@@ -77,7 +77,7 @@
       const address = document.getElementById("address").value.trim();
       const password = document.getElementById("password").value.trim();
 
-      const stored = sessionStorage.getItem(passKey);
+      const stored = localStorage.getItem(passKey);
       alert(`调试信息：userId = ${userId}\npassKey = ${passKey}\nstored = ${stored}`);
 
       if (!validateTRC20(address)) {
@@ -89,8 +89,8 @@
         return;
       }
       if (password !== stored) {
-        let err = parseInt(sessionStorage.getItem(errorKey) || "0") + 1;
-        sessionStorage.setItem(errorKey, err);
+        let err = parseInt(localStorage.getItem(errorKey) || "0") + 1;
+        localStorage.setItem(errorKey, err);
         if (err >= 5) {
           alert("🚫 您的账户已经被系统锁定，请联系客服人工处理。");
         } else {
@@ -98,7 +98,7 @@
         }
         return;
       }
-      sessionStorage.setItem(`withdrawAddress_${userId}`, address);
+      localStorage.setItem(`withdrawAddress_${userId}`, address);
       window.location.replace("bind_address_success.html");
     }
 
