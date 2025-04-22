@@ -11,7 +11,14 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     Telegram.WebApp.ready?.();
-    let userId = "test_user";
+    
+let userId = "anonymous";
+try {
+  userId = Telegram?.WebApp?.initDataUnsafe?.user?.id 
+           || new URLSearchParams(window.location.search).get("userId") 
+           || "anonymous";
+} catch (e) {}
+
     try {
       userId = Telegram.WebApp.initDataUnsafe?.user?.id || "test_user";
     } catch (e) {}
@@ -27,7 +34,7 @@
       const address = document.getElementById("address").value.trim();
       const password = document.getElementById("password").value.trim();
 
-      const stored = localStorage.getItem(passKey);
+      const stored = sessionStorage.getItem(passKey);
       alert(`调试信息：userId = ${userId}\npassKey = ${passKey}\nstored = ${stored}`);
 
       if (!validateTRC20(address)) {
@@ -39,8 +46,8 @@
         return;
       }
       if (password !== stored) {
-        let err = parseInt(localStorage.getItem(errorKey) || "0") + 1;
-        localStorage.setItem(errorKey, err);
+        let err = parseInt(sessionStorage.getItem(errorKey) || "0") + 1;
+        sessionStorage.setItem(errorKey, err);
         if (err >= 5) {
           alert("🚫 您的账户已经被系统锁定，请联系客服人工处理。");
         } else {
@@ -48,7 +55,7 @@
         }
         return;
       }
-      localStorage.setItem(`withdrawAddress_${userId}`, address);
+      sessionStorage.setItem(`withdrawAddress_${userId}`, address);
       window.location.replace("bind_address_success.html");
     }
 
@@ -61,7 +68,14 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     Telegram.WebApp.ready?.();
-    let userId = "test_user";
+    
+let userId = "anonymous";
+try {
+  userId = Telegram?.WebApp?.initDataUnsafe?.user?.id 
+           || new URLSearchParams(window.location.search).get("userId") 
+           || "anonymous";
+} catch (e) {}
+
     try {
       userId = Telegram.WebApp.initDataUnsafe?.user?.id || "test_user";
     } catch (e) {}
@@ -77,7 +91,7 @@
       const address = document.getElementById("address").value.trim();
       const password = document.getElementById("password").value.trim();
 
-      const stored = localStorage.getItem(passKey);
+      const stored = sessionStorage.getItem(passKey);
       alert(`调试信息：userId = ${userId}\npassKey = ${passKey}\nstored = ${stored}`);
 
       if (!validateTRC20(address)) {
@@ -89,8 +103,8 @@
         return;
       }
       if (password !== stored) {
-        let err = parseInt(localStorage.getItem(errorKey) || "0") + 1;
-        localStorage.setItem(errorKey, err);
+        let err = parseInt(sessionStorage.getItem(errorKey) || "0") + 1;
+        sessionStorage.setItem(errorKey, err);
         if (err >= 5) {
           alert("🚫 您的账户已经被系统锁定，请联系客服人工处理。");
         } else {
@@ -98,7 +112,7 @@
         }
         return;
       }
-      localStorage.setItem(`withdrawAddress_${userId}`, address);
+      sessionStorage.setItem(`withdrawAddress_${userId}`, address);
       window.location.replace("bind_address_success.html");
     }
 
