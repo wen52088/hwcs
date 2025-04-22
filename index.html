@@ -31,14 +31,14 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     Telegram.WebApp.expand();
-    const user = Telegram.WebApp.initDataUnsafe.user || {};
-    const nickname = user.username || user.first_name || "匿名";
-    const uid = user.id || "未知";
-    const userBalance = 0.00;
+const user = Telegram.WebApp.initDataUnsafe.user || {};
+const uid = user.id || "未知";
+const nickname = user.username || (user.first_name || "") + (user.last_name || "") || "匿名";
+const userBalance = 0.00;
 
-    document.getElementById("user-id").innerText = uid;
-    document.getElementById("user-name").innerText = nickname;
-    document.getElementById("user-balance").innerText = userBalance.toFixed(2);
+document.getElementById("user-id").innerText = uid;
+document.getElementById("user-name").innerText = nickname;
+document.getElementById("user-balance").innerText = userBalance.toFixed(2);
   </script>
 </body>
 </html>
